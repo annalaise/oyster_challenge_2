@@ -31,5 +31,3 @@ journey.complete?
 # Record current Time and Date of either In or Out
 # 'end of day' is Date + 1 and time + 1 min
 # If end of day, no tap = penalty charge (and leave empty touch point as nil (or unknown?))
-
-Plan

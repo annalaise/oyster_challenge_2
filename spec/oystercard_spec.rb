@@ -18,7 +18,7 @@ describe Oystercard do
     expect(card).to have_attributes(balance: 0)
   end
 
-  context '#top_up' do
+  context 'topping up' do
     it 'increments the card balance' do
       expect { card.top_up(top_up) }.to change { card.balance }.by top_up
     end
@@ -39,12 +39,11 @@ describe Oystercard do
         end
       end
 
-    describe '#touch_out' do
+    context 'touching out' do
       before { card.touch_out(station) }
 
       it 'deducts an amount from the balance when touching out' do
         expect { card.touch_out(station) }.to change {card.balance }.by -journey.calc_fare
       end
     end
-
 end

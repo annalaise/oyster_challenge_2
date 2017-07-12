@@ -2,7 +2,6 @@ require './lib/journey.rb'
 
 describe Journey do
   subject(:journey) { described_class.new }
-  # let(:card) { double :card }
   let(:station) { "Bank" }
 
   it 'starts with no history' do
