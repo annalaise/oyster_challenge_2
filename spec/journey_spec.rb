@@ -14,20 +14,21 @@ describe Journey do
     expect(journey.entry_station(station)).to eq station
   end
 
-  context 'journey happened' do
+  context 'complete journey' do
     before do
       journey.entry_station(station)
       journey.exit_station(station)
     end
 
-      it 'creates journey_history' do
+      it 'records journey history' do
         expect(journey.history).to eq [{station => station}]
       end
-      it 'records if journey is not complete ' do
+
+      it '#complete?' do
         expect(journey.complete?).to eq true
       end
 
-      it 'calculates standard fare' do
+      it 'calculates minimum fare' do
         expect(journey.calc_fare).to eq 1
       end
   end
@@ -38,8 +39,12 @@ describe Journey do
       journey.exit_station(nil)
     end
 
-    it 'creates journey_history' do
+    it 'records journey history' do
       expect(journey.history).to eq [{station => nil}]
+    end
+
+    it 'calculates penalty fare' do
+      expect(journey.calc_fare).to eq Journey::PENALTY_FARE
     end
   end
 end

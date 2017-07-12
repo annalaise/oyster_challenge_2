@@ -8,6 +8,7 @@ describe Oystercard do
 
   let(:station) { double "station" }
   let(:journey) { double :journey, entry_station: station, exit_station: station, calc_fare: 1}
+  let(:incomplete_journey) { double :journey, entry_station: station, exit_station: nil, calc_fare: 6}
 
   it 'creates card' do
    expect(card).to respond_to(:balance)
@@ -43,8 +44,7 @@ describe Oystercard do
 
       it 'deducts an amount from the balance when touching out' do
         expect { card.touch_out(station) }.to change {card.balance }.by -journey.calc_fare
-
-
       end
     end
+
 end
