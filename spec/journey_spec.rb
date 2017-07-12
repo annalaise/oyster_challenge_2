@@ -14,21 +14,23 @@ describe Journey do
     expect(journey.entry_station(station)).to eq station
   end
 
-  it 'get exit_station' do
-    expect(journey.exit_station(station)). to eq station
-  end
 
-  # it 'records if journey is complete or not' do
-  #
-  # end
-  #
-  # it 'calculates fare' do
-  #
-  # end
-  #
-  it 'creates journey_history' do
-    expect(journey.history).to eq [{station => station}]
-  end
+  context 'journey happend' do
+    before do
+      journey.entry_station(station)
+      journey.exit_station(station)
+    end
 
+      it 'creates journey_history' do
+        expect(journey.history).to eq [{station => station}]
+      end
+      it 'records if journey is not complete ' do
+        expect(journey.complete?).to eq true
+      end
+
+      it 'calculates standard fare' do
+        expect(journey.calc_fare).to eq 1
+      end
+  end
 
 end
