@@ -2,7 +2,7 @@ require './lib/journey.rb'
 
 describe Journey do
   subject(:journey) { described_class.new }
-  let(:card) { double :card }
+  # let(:card) { double :card }
   let(:station) { "Bank" }
 
   it 'starts with no history' do
@@ -10,7 +10,6 @@ describe Journey do
   end
 
   it 'gets entry_station' do
-    # card.touch_in(station)
     expect(journey.entry_station(station)).to eq station
   end
 
