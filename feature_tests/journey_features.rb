@@ -6,13 +6,13 @@ require './lib/journey.rb'
 # I need a penalty charge deducted if I fail to touch in or out
 
 journey = Journey.new
-card = Oystercard.new
+card = Oystercard.new(journey)
 
 card.top_up(50)
 card.touch_in("Bank")
-p journey.entry_station
+p journey
 card.touch_out("Highgate")
-p journey.exit_station
+p journey
 
 
 

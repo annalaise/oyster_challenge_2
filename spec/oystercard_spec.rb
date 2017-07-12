@@ -5,11 +5,11 @@ describe Oystercard do
   let(:top_up) { 50 }
   let(:max_balance) { described_class::MAX_BALANCE }
   let(:minumum_balance) { 1 }
-  let(:minumum_fare) { 1 }
-  let(:station) { double "station" }
-  let(:journey) { double :journey, entry_station: station, exit_station: station }
 
-  it 'creates card'
+  let(:station) { double "station" }
+  let(:journey) { double :journey, entry_station: station, exit_station: station, calc_fare: 1}
+
+  it 'creates card' do
    expect(card).to respond_to(:balance)
   end
 
@@ -42,7 +42,9 @@ describe Oystercard do
       before { card.touch_out(station) }
 
       it 'deducts an amount from the balance when touching out' do
-        expect { card.touch_out(station) }.to change { card.balance }.by -minumum_fare
+        expect { card.touch_out(station) }.to change {card.balance }.by -journey.calc_fare
+
+
       end
     end
 end

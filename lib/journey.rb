@@ -31,8 +31,11 @@ class Journey
   end
 
   def calc_fare
-    MINIMUM_FARE if complete?
-    # PENALTY_FARE if !complete?
+    if complete? == true
+      return MINIMUM_FARE
+    else
+      return PENALTY_FARE
+    end  
   end
 
 end

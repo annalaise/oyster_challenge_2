@@ -14,7 +14,6 @@ describe Journey do
     expect(journey.entry_station(station)).to eq station
   end
 
-
   context 'journey happened' do
     before do
       journey.entry_station(station)
@@ -33,4 +32,14 @@ describe Journey do
       end
   end
 
+  context 'incomplete journey' do
+    before do
+      journey.entry_station(station)
+      journey.exit_station(nil)
+    end
+
+    it 'creates journey_history' do
+      expect(journey.history).to eq [{station => nil}]
+    end
+  end
 end
