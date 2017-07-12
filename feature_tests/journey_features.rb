@@ -6,12 +6,21 @@ require './lib/journey.rb'
 # I need a penalty charge deducted if I fail to touch in or out
 
 journey = Journey.new
+card = Oystercard.new
 
-journey.start(entry_station) # touch_in calls this method
-journey.finish(exit_station) # touch_out calls this method
+card.top_up(50)
+card.touch_in("Bank")
+p journey.entry_station
+card.touch_out("Highgate")
+p journey.exit_station
+
+
+
 journey.save_journey # adds journey to array (journey finish)
 journey.calc_fare # within this, detects normal or penalty fare
 journey.complete?
+
+
 
 # Penalty Fare States
 # 1. Touch in and don't touch out

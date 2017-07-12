@@ -15,7 +15,7 @@ describe Journey do
   end
 
 
-  context 'journey happend' do
+  context 'journey happened' do
     before do
       journey.entry_station(station)
       journey.exit_station(station)

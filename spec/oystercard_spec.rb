@@ -1,24 +1,21 @@
 require './lib/oystercard.rb'
 
 describe Oystercard do
-  subject(:card) { described_class.new }
+  subject(:card) { described_class.new(journey) }
   let(:top_up) { 50 }
   let(:max_balance) { described_class::MAX_BALANCE }
   let(:minumum_balance) { 1 }
   let(:minumum_fare) { 1 }
   let(:station) { double "station" }
+  let(:journey) { double :journey, entry_station: station, exit_station: station }
 
-  it 'creates card' do
+  it 'creates card'
    expect(card).to respond_to(:balance)
   end
 
   it 'has initial balance of 0' do
     expect(card).to have_attributes(balance: 0)
   end
-
-  # it 'has no journey history when created' do
-  #   expect(card.journey_history).to eq []
-  # end
 
   context '#top_up' do
     it 'increments the card balance' do
@@ -35,11 +32,6 @@ describe Oystercard do
 
       describe '#touch_in' do
 
-        # it 'remembers entry station' do
-        #   card.touch_in(station)
-        #   expect(card.entry_station).to eq station
-        # end
-
           it "requires a minimum balance on a card to start a journey" do
             expect(card.balance).to satisfy { |balance| balance >= minumum_balance }
           end
@@ -53,16 +45,4 @@ describe Oystercard do
         expect { card.touch_out(station) }.to change { card.balance }.by -minumum_fare
       end
     end
-
-  context 'testing journey history' do
-    before do
-      card.top_up(top_up)
-      card.touch_in(station)
-      card.touch_out(station)
-    end
-
-      # it 'creates a journey history record' do
-      #   expect(card.journey_history).to eq [{station => station}]
-      # end
-  end
 end

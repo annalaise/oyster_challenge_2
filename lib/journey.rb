@@ -13,9 +13,7 @@ class Journey
   end
 
   def entry_station(station)
-
     @entry_station = station
-
   end
 
   def exit_station(station)
