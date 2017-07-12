@@ -16,9 +16,9 @@ describe Oystercard do
     expect(card).to have_attributes(balance: 0)
   end
 
-  it 'has no journey history when created' do
-    expect(card.journey_history).to eq []
-  end
+  # it 'has no journey history when created' do
+  #   expect(card.journey_history).to eq []
+  # end
 
   context '#top_up' do
     it 'increments the card balance' do
@@ -35,10 +35,10 @@ describe Oystercard do
 
       describe '#touch_in' do
 
-        it 'remembers entry station' do
-          card.touch_in(station)
-          expect(card.entry_station).to eq station
-        end
+        # it 'remembers entry station' do
+        #   card.touch_in(station)
+        #   expect(card.entry_station).to eq station
+        # end
 
           it "requires a minimum balance on a card to start a journey" do
             expect(card.balance).to satisfy { |balance| balance >= minumum_balance }
@@ -61,8 +61,8 @@ describe Oystercard do
       card.touch_out(station)
     end
 
-      it 'creates a journey history record' do
-        expect(card.journey_history).to eq [{station => station}]
-      end
+      # it 'creates a journey history record' do
+      #   expect(card.journey_history).to eq [{station => station}]
+      # end
   end
 end
