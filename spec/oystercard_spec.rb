@@ -25,42 +25,44 @@ describe Oystercard do
       expect { card.top_up(top_up) }.to change { card.balance }.by top_up
     end
 
-    it 'enforces max balance of £90' do
-      expect { card.top_up(max_balance + 1) }.to raise_error ("Top up limit is £#{max_balance}")
-    end
+      it 'enforces max balance of £90' do
+        expect { card.top_up(max_balance + 1) }.to raise_error ("Top up limit is £#{max_balance}")
+      end
   end
 
-context 'has funds' do
-  before { card.top_up(max_balance) }
+  context 'has funds' do
+    before { card.top_up(max_balance) }
 
-    describe '#touch_in' do
+      describe '#touch_in' do
 
-      it 'remembers entry station' do
-        card.touch_in(station)
-        expect(card.entry_station).to eq station
+        it 'remembers entry station' do
+          card.touch_in(station)
+          expect(card.entry_station).to eq station
+        end
+
+          it "requires a minimum balance on a card to start a journey" do
+            expect(card.balance).to satisfy { |balance| balance >= minumum_balance }
+          end
+        end
       end
-    end
 
     describe '#touch_out' do
       before { card.touch_out(station) }
 
-      it "sets entry_station to nil" do
-        expect(card.entry_station).to eq nil
+      it 'deducts an amount from the balance when touching out' do
+        expect { card.touch_out(station) }.to change { card.balance }.by -minumum_fare
       end
     end
 
-    it 'deducts an amount from the balance when touching out' do
-      expect { card.touch_out(station) }.to change { card.balance }.by -minumum_fare
-    end
-
-    it "requires a minimum balance on a card to start a journey" do
-      expect(card.balance).to satisfy { |balance| balance >= minumum_balance }
-    end
-
-    it 'creates a journey history record' do
+  context 'testing journey history' do
+    before do
+      card.top_up(top_up)
+      card.touch_in(station)
       card.touch_out(station)
-      expect(card.journey_history).to_not eq nil
     end
 
+      it 'creates a journey history record' do
+        expect(card.journey_history).to eq [{station => station}]
+      end
   end
 end

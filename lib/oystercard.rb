@@ -28,18 +28,12 @@ class Oystercard
   end
 
   def save_journey
-    key = @entry_station
-    value = @exit_station
-    @journey_history << {key => value}
+    @journey_history << {@entry_station => @exit_station}
   end
 
   private
   def deduct(amount)
     @balance -= amount
   end
-
-  # def in_journey?
-  #   false if @entry_station == nil else true
-  # end
 
 end
