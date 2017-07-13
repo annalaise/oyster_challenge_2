@@ -22,9 +22,11 @@ class Oystercard
 
   def touch_out(station)
     @journey.exit_station(station)
-    deduct(@journey.calc_fare)
   end
 
+  def charge
+    deduct(@journey.calc_fare)
+  end
 
   private
   def deduct(amount)

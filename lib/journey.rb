@@ -19,7 +19,6 @@ class Journey
   def exit_station(station)
     @exit_station = station
     save_journey
-
   end
 
   def save_journey
@@ -35,7 +34,7 @@ class Journey
       return MINIMUM_FARE
     else
       return PENALTY_FARE
-    end  
+    end
   end
 
 end
