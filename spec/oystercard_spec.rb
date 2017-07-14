@@ -32,6 +32,9 @@ describe Oystercard do
 
     context 'touching out' do
       before do
+        allow(journey).to receive(:incomplete?).and_return false
+        allow(journey).to receive(:save_journey)
+        allow(journey).to receive(:reset_journey)
         card.top_up(max_balance)
         card.touch_in(station)
         card.touch_out(station)

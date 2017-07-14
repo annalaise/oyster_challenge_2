@@ -1,6 +1,7 @@
 
-
 class Journey
+
+attr_reader :history
 
   MINIMUM_FARE = 1
   PENALTY_FARE = 6
@@ -24,8 +25,18 @@ class Journey
     @history << {@entry_station => @exit_station}
   end
 
+  def incomplete?
+    true if @entry_station != nil
+    save_journey
+  end
+
   def complete?
     true if @entry_station && @exit_station != nil
+  end
+
+  def reset_journey
+    entry_station(nil)
+    exit_station(nil)
   end
 
   def calc_fare

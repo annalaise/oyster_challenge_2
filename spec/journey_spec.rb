@@ -35,6 +35,7 @@ describe Journey do
     before do
       journey.entry_station(station)
       journey.exit_station(nil)
+      journey.entry_station(station)
     end
 
     it 'records journey history' do
