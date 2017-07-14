@@ -1,26 +1,32 @@
+<<<<<<< HEAD
 cd require './lib/journey.rb'
+=======
+require './lib/journey.rb'
+require './lib/oystercard.rb'
+>>>>>>> dd39eb85972afd90838f38f0dbc6cd8dd66cf137
 
 # USER STORY
 # In order to be charged correctly
 # As a customer
 # I need a penalty charge deducted if I fail to touch in or out
 
+# Complete Journey
 journey = Journey.new
 card = Oystercard.new(journey)
-
 card.top_up(50)
 card.touch_in("Bank")
 p journey
 card.touch_out("Highgate")
 p journey
+card.charge # calculates minimum fare
 
-
-
-journey.save_journey # adds journey to array (journey finish)
-journey.calc_fare # within this, detects normal or penalty fare
-journey.complete?
-
-
+# Incomplete Journey (no touch out)
+journey2 = Journey.new
+card2 = Oystercard.new(journey2)
+card2.top_up(50)
+card2.touch_in("Bank") # User does NOT touch out
+p journey2
+card2.charge
 
 # Penalty Fare States
 # 1. Touch in and don't touch out
