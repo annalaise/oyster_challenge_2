@@ -2,7 +2,6 @@
 
 class Journey
 
-  attr_reader :history
   MINIMUM_FARE = 1
   PENALTY_FARE = 6
 
@@ -35,7 +34,8 @@ class Journey
       return MINIMUM_FARE
     else
       return PENALTY_FARE
-    end  
+    end
   end
+
 
 end

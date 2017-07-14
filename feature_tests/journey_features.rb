@@ -1,4 +1,4 @@
-require './lib/journey.rb'
+cd require './lib/journey.rb'
 
 # USER STORY
 # In order to be charged correctly
